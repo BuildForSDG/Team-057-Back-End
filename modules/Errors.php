@@ -4,16 +4,20 @@
 
         // Authentication
 
-        // public $first_name;
-        // public $last_name;
-        // public $email;
-        // public $username;
-        // public $phone;
-        // public $dob;
-        // public $password;
+        
+        public $first_name;
+        public $last_name;
+        public $gender;
+        public $email;
+        public $phone;
+        public $dob;
+        public $country;
+        public $state;
+        public $city;
+        public $address;
 
         function has ($name) {
-            if (isset($this->errors[$name])) {
+            if (isset($this->errors->{$name})) {
                 return true;
             }
             else {
@@ -40,10 +44,10 @@
             elseif ($this->last_name) {
                 return false;
             }
-            elseif ($this->email) {
+            elseif ($this->gender) {
                 return false;
             }
-            elseif ($this->username) {
+            elseif ($this->email) {
                 return false;
             }
             elseif ($this->phone) {

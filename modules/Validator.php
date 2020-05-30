@@ -4,6 +4,7 @@
         public $admin;
         public $errors;
 
+        public $intent;
         
         public $first_name;
         public $last_name;
@@ -18,30 +19,119 @@
             $this->errors = new Errors();
         }
 
-        function validateLogin () {
+        function validateDialogflow () {
 
             $data = json_decode(file_get_contents("php://input"));
 
-            $this->login = $data->{'log in'};
-            $this->password = $data->{'password'};
-            $this->remember_me = $data->{'remember me'};
+            $intent = $data->queryResult->intent->displayName;
+            $inputs = $data->queryResult->parameters;
+            $queryString = $data->queryResult->queryText;
 
-            // Validate Log In Data
+            switch ($intent) {
+                case 'onboarding':
+                    $this->first_name = $inputs->{'given-name'};
+                    $this->last_name = $inputs->{'last-name'};
+                    $this->gender = $inputs->{'gender'};
+                    $this->email = $inputs->{'email'};
+                    $this->phone = $inputs->{'phone-number'};
+                    $this->dob = $inputs->{'date'};
+                    $this->country = $inputs->{'geo-country'};
+                    $this->state = $inputs->{'geo-state'};
+                    $this->city = $inputs->{'geo-city'};
+                    $this->address = $inputs->{'address'};
 
-            $user = dbSelectAll('users', "`Email` = '" . $this->login . "' OR `Username` = '" . $this->login . "'");
-        
-            if ($user) {
-                if (password_verify($this->password, $user[0]['Password'])) {
-                    $this->user =  $user[0];
-                    return true;
-                }
-                else {
-                    $this->errors->password = 'Incorrect password';
-                    return false;
-                }
+                    $emailExists = intval(!dbSelectAll('users', "`Email` = '" . $this->email . "'"));
+                    $phoneExists = intval(!dbSelectAll('users', "`Phone` = '" . $this->phone . "'"));
+                    $dobInvalid = intval(!time() <= strtotime($this->dob));
+
+                    if ($this->email != "" && $emailExists) {
+                        $this->errors->email = 'This email address has already been used. Already have an account? Try signing in.';
+                    }
+                    elseif ($this->phone != "" && $phoneExists) {
+                        $this->errors->phone = 'This phone number is linked to an account already.';
+                    }
+                    elseif ($this->dob != "" && $dobInvalid) {
+                        $this->errors->dob = 'I need a valid date of birth please.';
+                    }
+
+                    
+            
+                    // Validate Sign Up Data
+
+                    if (!$this->first_name) {
+                        $this->errors->first_name = 'Your first name?';
+                    }
+
+                    if (!$this->last_name) {
+                        $this->errors->last_name = 'Please input your last name';
+                    }
+
+                    $user = dbSelectAll('users', "`Email` = '" . $this->email . "'");
+
+                    if (!$this->email) {
+                        $this->errors->email = 'Please input your email address';
+                    }
+                    elseif ($user) {
+                        $this->errors->email = 'Email already exists';
+                    }
+
+                    $user = dbSelectAll('users', "`Username` = '" . $this->username . "'");
+
+                    if (!$this->username) {
+                        $this->errors->username = 'Please input your username';
+                    }
+                    elseif ($user) {
+                        $this->errors->username = 'Username already exists';
+                    }
+
+                    $user = dbSelectAll('users', "`Phone` = '" . $this->phone . "'");
+
+                    if (!$this->phone) {
+                        $this->errors->phone = 'Please input your phone number';
+                    }
+                    elseif ($user) {
+                        $this->errors->phone = 'Phone number already exists';
+                    }
+
+                    if (!$this->dob) {
+                        $this->errors->dob = 'Please input your phone number';
+                    }
+                    elseif (time() <= strtotime($this->dob)) {
+                        $this->errors->dob = 'Please input a valid date of birth';
+                    }
+                    elseif (strtotime($this->dob) > strtotime('-10 years', time())) {
+                        $this->errors->dob = 'Sorry, this service is available only to students from 10 years and above.';
+                    }
+                    
+                    if (!$this->password) {
+                        $this->errors->password = 'Please input your email address';
+                    }
+                    elseif (strlen($this->password) < 6) {
+                        $this->errors->password = 'Password length should be more than 6';
+                    }
+                    elseif ($this->password != $this->password_confirmation) {
+                        $this->errors->password = 'Passwords don\'t match';
+                    }
+
+                    if ($this->errors->isvalid()) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+
+
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+
+            if ($this->errors->isvalid()) {
+                return true;
             }
             else {
-                $this->errors->login = 'Email or username does not exist';
                 return false;
             }
 

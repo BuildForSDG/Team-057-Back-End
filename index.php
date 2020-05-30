@@ -13,7 +13,8 @@
     
     if ($method === 'POST') {
         switch ($request) {
-            // case '/api/v1/on-covid-19' : action('api/estimate-json'); break;
+            case '/dialogflow' : action('api/dialogflow'); break;
+            case '/queries' : action('api/queries'); break;
             
             default: require 'app/routes.php'; break;
         }
@@ -22,9 +23,6 @@
         switch ($request) {
             case '' : _(getenv('APP_NAME')); break;
             case '/' : _(getenv('APP_NAME')); break;
-
-            case '/api/v1/on-covid-19/logs' : $logs->view(); break;
-            case '/api/v1/on-covid-19/logs/clear' : $logs->clear(); break;
             
             default: require 'app/routes.php'; break;
         }
