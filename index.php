@@ -23,6 +23,8 @@
         switch ($request) {
             case '' : _(getenv('APP_NAME')); break;
             case '/' : _(getenv('APP_NAME')); break;
+
+            case '/setup' : require 'database/migrations/setup.php'; break;
             
             default: require 'app/routes.php'; break;
         }
