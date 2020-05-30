@@ -73,9 +73,9 @@
                     if (!$this->dob) {
                         $this->errors->dob = 'Your date of birth?';
                     }
-                    elseif (time() <= strtotime($this->dob)) {
-                        $this->errors->dob = 'I need a valid date of birth please.';
-                    }
+                    // elseif (time() <= strtotime($this->dob)) {
+                    //     $this->errors->dob = 'I need a valid date of birth please.';
+                    // }
 
                     $user = dbSelectAll('users', "`Email` = '" . $this->email . "'");
 
