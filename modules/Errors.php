@@ -8,9 +8,9 @@
         public $first_name;
         public $last_name;
         public $gender;
+        public $dob;
         public $email;
         public $phone;
-        public $dob;
         public $country;
         public $state;
         public $city;
@@ -47,16 +47,25 @@
             elseif ($this->gender) {
                 return false;
             }
+            elseif ($this->dob) {
+                return false;
+            }
             elseif ($this->email) {
                 return false;
             }
             elseif ($this->phone) {
                 return false;
             }
-            elseif ($this->dob) {
+            elseif ($this->country) {
                 return false;
             }
-            elseif ($this->password) {
+            elseif ($this->state) {
+                return false;
+            }
+            elseif ($this->city) {
+                return false;
+            }
+            elseif ($this->address) {
                 return false;
             }
             else {

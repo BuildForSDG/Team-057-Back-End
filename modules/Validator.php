@@ -32,27 +32,27 @@
                     $this->first_name = $inputs->{'given-name'};
                     $this->last_name = $inputs->{'last-name'};
                     $this->gender = $inputs->{'gender'};
+                    $this->dob = $inputs->{'date'};
                     $this->email = $inputs->{'email'};
                     $this->phone = $inputs->{'phone-number'};
-                    $this->dob = $inputs->{'date'};
                     $this->country = $inputs->{'geo-country'};
                     $this->state = $inputs->{'geo-state'};
                     $this->city = $inputs->{'geo-city'};
                     $this->address = $inputs->{'address'};
 
-                    $emailExists = intval(!dbSelectAll('users', "`Email` = '" . $this->email . "'"));
-                    $phoneExists = intval(!dbSelectAll('users', "`Phone` = '" . $this->phone . "'"));
-                    $dobInvalid = intval(!time() <= strtotime($this->dob));
+                    // $emailExists = intval(!dbSelectAll('users', "`Email` = '" . $this->email . "'"));
+                    // $phoneExists = intval(!dbSelectAll('users', "`Phone` = '" . $this->phone . "'"));
+                    // $dobInvalid = intval(!time() <= strtotime($this->dob));
 
-                    if ($this->email != "" && $emailExists) {
-                        $this->errors->email = 'This email address has already been used. Already have an account? Try signing in.';
-                    }
-                    elseif ($this->phone != "" && $phoneExists) {
-                        $this->errors->phone = 'This phone number is linked to an account already.';
-                    }
-                    elseif ($this->dob != "" && $dobInvalid) {
-                        $this->errors->dob = 'I need a valid date of birth please.';
-                    }
+                    // if ($this->email != "" && $emailExists) {
+                    //     $this->errors->email = 'This email address has already been used. Already have an account?';
+                    // }
+                    // elseif ($this->phone != "" && $phoneExists) {
+                    //     $this->errors->phone = 'This phone number is linked to an account already.';
+                    // }
+                    // elseif ($this->dob != "" && $dobInvalid) {
+                    //     $this->errors->dob = 'I need a valid date of birth please.';
+                    // }
 
                     
             
@@ -63,25 +63,27 @@
                     }
 
                     if (!$this->last_name) {
-                        $this->errors->last_name = 'Please input your last name';
+                        $this->errors->last_name = 'Your last name?';
+                    }
+
+                    if (!$this->gender) {
+                        $this->errors->last_name = 'Your gender?';
+                    }
+
+                    if (!$this->dob) {
+                        $this->errors->dob = 'Your date of birth?';
+                    }
+                    elseif (time() <= strtotime($this->dob)) {
+                        $this->errors->dob = 'I need a valid date of birth please.';
                     }
 
                     $user = dbSelectAll('users', "`Email` = '" . $this->email . "'");
 
                     if (!$this->email) {
-                        $this->errors->email = 'Please input your email address';
+                        $this->errors->email = 'Your email address?';
                     }
                     elseif ($user) {
-                        $this->errors->email = 'Email already exists';
-                    }
-
-                    $user = dbSelectAll('users', "`Username` = '" . $this->username . "'");
-
-                    if (!$this->username) {
-                        $this->errors->username = 'Please input your username';
-                    }
-                    elseif ($user) {
-                        $this->errors->username = 'Username already exists';
+                        $this->errors->email = 'This email address has already been used. Already have an account?';
                     }
 
                     $user = dbSelectAll('users', "`Phone` = '" . $this->phone . "'");
@@ -90,34 +92,23 @@
                         $this->errors->phone = 'Please input your phone number';
                     }
                     elseif ($user) {
-                        $this->errors->phone = 'Phone number already exists';
+                        $this->errors->phone = 'This phone number is linked to an account already. Already have an account?';
                     }
 
-                    if (!$this->dob) {
-                        $this->errors->dob = 'Please input your phone number';
-                    }
-                    elseif (time() <= strtotime($this->dob)) {
-                        $this->errors->dob = 'Please input a valid date of birth';
-                    }
-                    elseif (strtotime($this->dob) > strtotime('-10 years', time())) {
-                        $this->errors->dob = 'Sorry, this service is available only to students from 10 years and above.';
-                    }
-                    
-                    if (!$this->password) {
-                        $this->errors->password = 'Please input your email address';
-                    }
-                    elseif (strlen($this->password) < 6) {
-                        $this->errors->password = 'Password length should be more than 6';
-                    }
-                    elseif ($this->password != $this->password_confirmation) {
-                        $this->errors->password = 'Passwords don\'t match';
+                    if (!$this->country) {
+                        $this->errors->country = 'Your country?';
                     }
 
-                    if ($this->errors->isvalid()) {
-                        return true;
+                    if (!$this->state) {
+                        $this->errors->state = 'Your state?';
                     }
-                    else {
-                        return false;
+
+                    if (!$this->city) {
+                        $this->errors->city = 'Your city?';
+                    }
+
+                    if (!$this->address) {
+                        $this->errors->address = 'Your home address?';
                     }
 
 
