@@ -5,6 +5,7 @@
         public $errors;
 
         public $intent;
+        public $responseText;
         
         public $first_name;
         public $last_name;
@@ -26,6 +27,8 @@
             $intent = $data->queryResult->intent->displayName;
             $inputs = $data->queryResult->parameters;
             $queryString = $data->queryResult->queryText;
+            
+            $this->responseText = $data->queryResult->fulfillmentText;
 
             switch ($intent) {
                 case 'onboarding':
@@ -40,76 +43,74 @@
                     $this->city = $inputs->{'geo-city'};
                     $this->address = $inputs->{'address'};
 
-                    // $emailExists = intval(!dbSelectAll('users', "`Email` = '" . $this->email . "'"));
-                    // $phoneExists = intval(!dbSelectAll('users', "`Phone` = '" . $this->phone . "'"));
-                    // $dobInvalid = intval(!time() <= strtotime($this->dob));
+                    $emailExists = intval(!dbSelectAll('users', "`Email` = '" . $this->email . "'"));
+                    $phoneExists = intval(!dbSelectAll('users', "`Phone` = '" . $this->phone . "'"));
+                    $dobInvalid = intval(!time() <= strtotime($this->dob));
 
-                    // if ($this->email != "" && $emailExists) {
-                    //     $this->errors->email = 'This email address has already been used. Already have an account?';
-                    // }
-                    // elseif ($this->phone != "" && $phoneExists) {
-                    //     $this->errors->phone = 'This phone number is linked to an account already.';
-                    // }
-                    // elseif ($this->dob != "" && $dobInvalid) {
-                    //     $this->errors->dob = 'I need a valid date of birth please.';
-                    // }
+                    
+                    if ($this->dob != "" && $dobInvalid) {
+                        $this->errors->dob = 'I need a valid date of birth please.';
+                    }
+                    elseif ($this->email != "" && $emailExists) {
+                        $this->errors->email = 'This email address has already been used. Already have an account?';
+                    }
+                    elseif ($this->phone != "" && $phoneExists) {
+                        $this->errors->phone = 'This phone number is linked to an account already.';
+                    }
 
                     
             
                     // Validate Sign Up Data
 
-                    if (!$this->first_name) {
-                        $this->errors->first_name = 'Your first name?';
-                    }
-
-                    if (!$this->last_name) {
-                        $this->errors->last_name = 'Your last name?';
-                    }
-
-                    if (!$this->gender) {
-                        $this->errors->last_name = 'Your gender?';
-                    }
-
-                    if (!$this->dob) {
-                        $this->errors->dob = 'Your date of birth?';
-                    }
-                    // elseif (time() <= strtotime($this->dob)) {
-                    //     $this->errors->dob = 'I need a valid date of birth please.';
+                    // if (!$this->first_name) {
+                    //     $this->errors->first_name = 'Your first name?';
                     // }
 
-                    $user = dbSelectAll('users', "`Email` = '" . $this->email . "'");
+                    // if (!$this->last_name) {
+                    //     $this->errors->last_name = 'Your last name?';
+                    // }
 
-                    if (!$this->email) {
-                        $this->errors->email = 'Your email address?';
-                    }
-                    elseif ($user) {
-                        $this->errors->email = 'This email address has already been used. Already have an account?';
-                    }
+                    // if (!$this->gender) {
+                    //     $this->errors->last_name = 'Your gender?';
+                    // }
 
-                    $user = dbSelectAll('users', "`Phone` = '" . $this->phone . "'");
+                    // if (!$this->dob) {
+                    //     $this->errors->dob = 'Your date of birth?';
+                    // }
 
-                    if (!$this->phone) {
-                        $this->errors->phone = 'Please input your phone number';
-                    }
-                    elseif ($user) {
-                        $this->errors->phone = 'This phone number is linked to an account already. Already have an account?';
-                    }
+                    // $user = dbSelectAll('users', "`Email` = '" . $this->email . "'");
 
-                    if (!$this->country) {
-                        $this->errors->country = 'Your country?';
-                    }
+                    // if (!$this->email) {
+                    //     $this->errors->email = 'Your email address?';
+                    // }
+                    // elseif ($user) {
+                    //     $this->errors->email = 'This email address has already been used. Already have an account?';
+                    // }
 
-                    if (!$this->state) {
-                        $this->errors->state = 'Your state?';
-                    }
+                    // $user = dbSelectAll('users', "`Phone` = '" . $this->phone . "'");
 
-                    if (!$this->city) {
-                        $this->errors->city = 'Your city?';
-                    }
+                    // if (!$this->phone) {
+                    //     $this->errors->phone = 'Please input your phone number';
+                    // }
+                    // elseif ($user) {
+                    //     $this->errors->phone = 'This phone number is linked to an account already. Already have an account?';
+                    // }
 
-                    if (!$this->address) {
-                        $this->errors->address = 'Your home address?';
-                    }
+                    // if (!$this->country) {
+                    //     $this->errors->country = 'Your country?';
+                    // }
+
+                    // if (!$this->state) {
+                    //     $this->errors->state = 'Your state?';
+                    // }
+
+                    // if (!$this->city) {
+                    //     $this->errors->city = 'Your city?';
+                    // }
+
+                    // if (!$this->address) {
+                    //     $this->errors->address = 'Your home address?';
+                    // }
 
 
                     break;
