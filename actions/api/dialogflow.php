@@ -23,7 +23,7 @@
 
     // require 'actions/api/api.php';
 
-
+    $output = [];
 
     $input = new Validator();
 
