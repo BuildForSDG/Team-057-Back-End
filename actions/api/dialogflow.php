@@ -126,13 +126,13 @@
 
         $responseText = "";
         
-        if ($errors->dob) {
+        if ($errors->dob && $input->dob) {
             $responseText = $errors->dob;
         }
-        elseif ($errors->email) {
+        elseif ($errors->email && $input->email) {
             $responseText = $errors->email;
         }
-        elseif ($errors->phone) {
+        elseif ($errors->phone && $input->phone) {
             $responseText = $errors->phone;
         }
 
