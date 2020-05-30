@@ -29,100 +29,55 @@
 
     if ($input->validateDialogflow()) {
 
-        $output = [
-            "fulfillmentMessages" => [
-                [
-                    "text" => [
+        // User Creation
+
+        $user = new User();
+
+        $user->first_name = $input->first_name;
+        $user->last_name = $input->last_name;
+        $user->gender = $input->gender;
+        $user->dob = $input->dob;
+        $user->email = $input->email;
+        $user->phone = $input->phone;
+        $user->country = $input->country;
+        $user->state = $input->state;
+        $user->city = $input->city;
+        $user->address = $input->address;
+
+        if ($user->create()) {
+
+            $output = [
+                "fulfillmentMessages" => [
+                    [
                         "text" => [
-                            "Account Created Successfully."
+                            "text" => [
+                                "Account Created Successfully."
+                            ]
                         ]
                     ]
                 ]
-            ]
-        ];
+            ];
+        }
+        else {
 
-        // User Creation
-
-        // $user = new User();
-
-        // $user->first_name = $input->first_name;
-        // $user->last_name = $input->last_name;
-        // $user->email = $input->email;
-        // $user->username = $input->username;
-        // $user->phone = $input->phone;
-        // $user->dob = $input->dob;
-        // $user->password = $input->password;
-
-        // if ($user->create()) {
-
-        //     $output = [
-        //         "success" => true,
-        //         "message" => "User account created successfully",
-        //         "redirectTo" => "/sign-in",
-        //         "data" => [
-        //             "User ID" => $user->user_id,
-        //             "First Name" => $user->first_name,
-        //             "Last Name" => $user->last_name,
-        //             "Email" => $user->email,
-        //             "Username" => $user->username,
-        //             "Phone" => $user->phone,
-        //             "Date of Birth" => $user->dob,
-        //         ],
-        //     ];
-        // }
-        // else {
-
-        //     $output = [
-        //         "success" => false,
-        //         "message" => "User account could not be created, please try again.",
-        //         "redirectTo" => "/create-account",
-        //         "data" => [
-        //             "First Name" => $user->first_name,
-        //             "Last Name" => $user->last_name,
-        //             "Email" => $user->email,
-        //             "Username" => $user->username,
-        //             "Phone" => $user->phone,
-        //             "Date of Birth" => $user->dob,
-        //         ],
-        //     ];
-        // }
+            $output = [
+                "fulfillmentMessages" => [
+                    [
+                        "text" => [
+                            "text" => [
+                                "Account Wasn't Created Successfully."
+                            ]
+                        ]
+                    ]
+                ]
+            ];
+        }
     }
     else {
 
         // Log Errors
     
         $errors = $input->errors;
-        
-        // if ($errors->first_name) {
-        //     $responseText = $errors->first_name;
-        // }
-        // elseif ($errors->last_name) {
-        //     $responseText = $errors->last_name;
-        // }
-        // elseif ($errors->gender) {
-        //     $responseText = $errors->last_name;
-        // }
-        // elseif ($errors->dob) {
-        //     $responseText = $errors->dob;
-        // }
-        // elseif ($errors->email) {
-        //     $responseText = $errors->email;
-        // }
-        // elseif ($errors->phone) {
-        //     $responseText = $errors->phone;
-        // }
-        // elseif ($errors->country) {
-        //     $responseText = $errors->country;
-        // }
-        // elseif ($errors->state) {
-        //     $responseText = $errors->state;
-        // }
-        // elseif ($errors->city) {
-        //     $responseText = $errors->city;
-        // }
-        // elseif ($errors->address) {
-        //     $responseText = $errors->address;
-        // }
 
         $responseText = "";
         

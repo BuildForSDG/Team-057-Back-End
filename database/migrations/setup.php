@@ -17,4 +17,11 @@
         name('Updated At').timestamp().null(true),
         name('Created At').timestamp().null(false).def('CURRENT_TIMESTAMP')
     ]);
+
+    dbCreate('email_verifications', [
+        name('id').intg().null(false).autoInc(),
+        name('Email').text().null(false),
+        name('OTP').text().null(true),
+        name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
+    ]);
 ?>
