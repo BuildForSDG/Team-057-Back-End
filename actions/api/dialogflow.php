@@ -1,6 +1,6 @@
 <?php
     // Verification
-    
+
     $data = json_decode(file_get_contents("php://input"));
     
     $queries = fopen("queries", "a");
@@ -8,6 +8,34 @@
     fwrite($queries, json_encode($data) . "\n" . "\n" . "\n" . "\n");
 
     fclose($queries);
+
+// {
+//     "fulfillmentMessages": [
+//         {
+//             "text": {
+//                 "text": [
+//                     "Text response from webhook"
+//                 ]
+//             }
+//         }
+//     ]
+// }
+
+    $output = [
+        "fulfillmentMessages" => [
+            [
+                "text" => [
+                    "text" => [
+                        "Text response from webhook"
+                    ]
+                ]
+            ]
+        ]
+    ];
+
+    require 'actions/api/api.php';
+
+
 
     // $input = new Validator();
 
