@@ -120,7 +120,7 @@
         }
 
         public function OTPGen () {
-            return bin2hex(random_bytes(4));
+            return bin2hex(random_bytes(2));
         }
 
         public function removeToken () {

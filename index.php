@@ -24,6 +24,9 @@
             case '' : _(getenv('APP_NAME')); break;
             case '/' : _(getenv('APP_NAME')); break;
 
+
+            case '/view/users' : _(json_encode(dbSelectAll('users', 1))); break;
+
             case '/setup' : require 'database/migrations/setup.php'; break;
             
             default: require 'app/routes.php'; break;
