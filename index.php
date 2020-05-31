@@ -25,7 +25,7 @@
             case '/' : _(getenv('APP_NAME')); break;
 
 
-            case '/view/users' : _(json_encode(dbSelectAll('users', 1))); break;
+            case '/view/users' : header("Content-type: application/json"); _(json_encode(dbSelectAll('users', 1))); break;
 
             case '/setup' : require 'database/migrations/setup.php'; break;
             
