@@ -7,7 +7,7 @@
 
         // Road Tip Creation
 
-        $roadTip = new RoadTip();
+        $road_tip = new RoadTip();
 
         $road_tip->title = $input->title;
         $road_tip->content = $input->content;
