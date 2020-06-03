@@ -280,6 +280,10 @@
         return " TEXT";
     }
 
+    function json () {
+        return " JSON";
+    }
+
     function boln () {
         return " BOOLEAN";
     }
