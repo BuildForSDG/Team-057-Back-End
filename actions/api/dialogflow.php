@@ -51,7 +51,7 @@
                     [
                         "text" => [
                             "text" => [
-                                "Account Created Successfully."
+                                "Account created successfully."
                             ]
                         ]
                     ]
