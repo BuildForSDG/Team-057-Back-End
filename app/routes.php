@@ -1,7 +1,7 @@
 <?php
     if (fnmatch("/view/*", $request)) {
         // action('deal');
-        $db_table = str_replace('/view\/', '', $request);
+        $db_table = str_replace('/view/', '', $request);
 
         header("Content-type: application/json");
         
