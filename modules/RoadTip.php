@@ -17,7 +17,7 @@
                 'Illustration',
             ];
 
-            $insert = dbInsert ('users', $fillables, [
+            $insert = dbInsert ('road_tips', $fillables, [
                 [
                     $this->road_tip_id,
                     $this->title,
