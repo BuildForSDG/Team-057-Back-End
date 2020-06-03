@@ -21,7 +21,7 @@
     dbCreate('user_profiles', [
         name('id').intg().null(false).autoInc(),
         name('User ID').text().null(false),
-        name('Profile Data').text().null(true),
+        name('Profile Data').json().null(true),
         name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
     ]);
 
@@ -35,9 +35,9 @@
     dbCreate('regular_routes', [
         name('id').intg().null(false).autoInc(),
         name('Route ID').text().null(false),
-        name('Start').text().null(false),
-        name('Stop').text().null(true),
-        name('Route Data').text().null(true),
+        name('Start').json().null(false),
+        name('Stop').json().null(true),
+        name('Route Data').json().null(true),
         name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
     ]);
 
@@ -53,17 +53,17 @@
     dbCreate('distress_broadcasts', [
         name('id').intg().null(false).autoInc(),
         name('Distress ID').text().null(false),
-        name('Location').text().null(false),
-        name('Data').text().null(true),
+        name('Location').json().null(false),
+        name('Data').json().null(true),
         name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
     ]);
 
     dbCreate('poor_road_reports', [
         name('id').intg().null(false).autoInc(),
         name('Report ID').text().null(false),
-        name('Location').text().null(false),
+        name('Location').json().null(false),
         name('Damage Ratio').text().null(true),
-        name('Pictures').text().null(true),
+        name('Pictures').json().null(true),
         name('Data').text().null(false),
         name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
     ]);
@@ -71,10 +71,10 @@
     dbCreate('rouge_driver_reports', [
         name('id').intg().null(false).autoInc(),
         name('Report ID').text().null(false),
-        name('Location').text().null(false),
-        name('Pictures').text().null(true),
-        name('Medias').text().null(true),
-        name('Data').text().null(false),
+        name('Location').json().null(false),
+        name('Pictures').json().null(true),
+        name('Medias').json().null(true),
+        name('Data').json().null(false),
         name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
     ]);
 
