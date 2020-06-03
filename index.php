@@ -24,7 +24,6 @@
             case '' : _(getenv('APP_NAME')); break;
             case '/' : _(getenv('APP_NAME')); break;
 
-            case '/dropUser' : dbDropTable('user');
 
 
             // case '/view/users' : header("Content-type: application/json"); _(json_encode(dbSelectAll('users', 1))); break;

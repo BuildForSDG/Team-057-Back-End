@@ -1,11 +1,20 @@
 <?php
-    if (fnmatch("/view/*", $request)) {
-        // action('deal');
-        $db_table = str_replace('/view/', '', $request);
+    if (fnmatch("/db/view/*", $request)) {
+        
+        $db_table = str_replace('/db/view/', '', $request);
 
         header("Content-type: application/json");
         
         _(json_encode(dbSelectAll($db_table, 1)));
+
+    }
+    elseif (fnmatch("/db/drop/*", $request)) {
+        
+        $db_table = str_replace('/db/drop/', '', $request);
+
+        header("Content-type: application/json");
+
+        _((dbDropTable($db_table)) ? 'Done...' : 'Not Done...');
 
     }
     else {
