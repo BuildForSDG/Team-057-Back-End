@@ -1,4 +1,5 @@
 <?php
+    $output = [];
 
     $road_tips = new RoadTip();
 
@@ -27,5 +28,5 @@
     }
 
     require 'actions/api/api.php';
-    
+
 ?>
