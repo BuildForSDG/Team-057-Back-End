@@ -43,10 +43,10 @@
 
     dbCreate('road_tips', [
         name('id').intg().null(false).autoInc(),
-        name('Tip ID').text().null(false),
+        name('Road Tip ID').text().null(false),
         name('Title').text().null(false),
         name('Content').text().null(false),
-        name('Illustration').text().null(true),
+        name('Illustration').blob().null(true),
         name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
     ]);
 
@@ -63,7 +63,7 @@
         name('Report ID').text().null(false),
         name('Location').json().null(false),
         name('Damage Ratio').text().null(true),
-        name('Pictures').text().null(true),
+        name('Pictures').json().null(true),
         name('Data').text().null(false),
         name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
     ]);
@@ -75,6 +75,13 @@
         name('Pictures').json().null(true),
         name('Medias').json().null(true),
         name('Data').json().null(false),
+        name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
+    ]);
+
+    dbCreate('pictures', [
+        name('id').intg().null(false).autoInc(),
+        name('Picture ID').text().null(false),
+        name('Picture').blob().null(false),
         name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
     ]);
 ?>

@@ -4,7 +4,6 @@
 
         // Authentication
 
-        
         public $first_name;
         public $last_name;
         public $gender;
@@ -15,6 +14,12 @@
         public $state;
         public $city;
         public $address;
+
+        // Road Tips
+        
+        public $title;
+        public $content;
+        public $illustration;
 
         function has ($name) {
             if (isset($this->errors->{$name})) {
@@ -66,6 +71,15 @@
                 return false;
             }
             elseif ($this->address) {
+                return false;
+            }
+            elseif ($this->title) {
+                return false;
+            }
+            elseif ($this->content) {
+                return false;
+            }
+            elseif ($this->illustration) {
                 return false;
             }
             else {

@@ -51,7 +51,9 @@
                     [
                         "text" => [
                             "text" => [
-                                "Account created successfully."
+                                "Thanks for signing up " . $user->first_name . ", I am happy to have you onboard.",
+                                "An email has been sent to your email address " . $user->email . ". In it contains your account activation code.",
+                                "What is the activation code please?"
                             ]
                         ]
                     ]
