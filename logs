@@ -21,3 +21,5 @@ GET	/	200	00ms
 GET	/	200	320ms
 GET	/	200	01ms
 GET	/	200	276ms
+GET	/setup	200	184611ms
+GET	/setup	200	183017ms
