@@ -21,7 +21,7 @@
     dbCreate('user_profiles', [
         name('id').intg().null(false).autoInc(),
         name('User ID').text().null(false),
-        name('Profile Data').json(),
+        name('Profile Data').text(),
         name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
     ]);
 
@@ -35,9 +35,9 @@
     dbCreate('regular_routes', [
         name('id').intg().null(false).autoInc(),
         name('Route ID').text().null(false),
-        name('Start').json(),
-        name('Stop').json(),
-        name('Route Data').json(),
+        name('Start').text(),
+        name('Stop').text(),
+        name('Route Data').text(),
         name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
     ]);
 
@@ -53,17 +53,17 @@
     dbCreate('distress_broadcasts', [
         name('id').intg().null(false).autoInc(),
         name('Distress ID').text().null(false),
-        name('Location').json(),
-        name('Data').json(),
+        name('Location').text(),
+        name('Data').text(),
         name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
     ]);
 
     dbCreate('poor_road_reports', [
         name('id').intg().null(false).autoInc(),
         name('Report ID').text().null(false),
-        name('Location').json(),
+        name('Location').text(),
         name('Damage Ratio').text().null(true),
-        name('Pictures').json(),
+        name('Pictures').text(),
         name('Data').text().null(false),
         name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
     ]);
@@ -71,10 +71,10 @@
     dbCreate('rouge_driver_reports', [
         name('id').intg().null(false).autoInc(),
         name('Report ID').text().null(false),
-        name('Location').json(),
-        name('Pictures').json(),
-        name('Medias').json(),
-        name('Data').json(),
+        name('Location').text(),
+        name('Pictures').text(),
+        name('Medias').text(),
+        name('Data').text(),
         name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
     ]);
 
