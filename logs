@@ -24,3 +24,9 @@ GET	/	200	276ms
 GET	/setup	200	184611ms
 GET	/setup	200	183017ms
 GET	/setup	200	182526ms
+POST	/api/road-tips/create	424	42080ms
+GET	/setup	200	258509ms
+POST	/api/road-tips/create	424	40763ms
+POST	/api/road-tips/create	424	40586ms
+POST	/api/road-tips/create	400	21785ms
+POST	/api/road-tips/create	424	40685ms
