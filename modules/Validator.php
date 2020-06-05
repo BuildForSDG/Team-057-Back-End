@@ -20,6 +20,9 @@
         public $content;
         public $illustration;
 
+        public $location;
+        public $data;
+
         function __construct () {
             $this->errors = new Errors();
         }
@@ -292,6 +295,103 @@
             if (!$this->content) {
                 $this->errors->content = 'Your road tip requires the "Content"';
             }
+
+            if ($this->errors->isvalid()) {
+                return true;
+            }
+            else {
+                return false;
+            }
+    
+        }
+
+        function validateNewDistress () {
+
+            $data = json_decode(file_get_contents("php://input"));
+
+            $this->location = $data->{'location'};
+            $this->data = $data->{'data'};
+            
+            // Validate Distress Broadcast Data
+
+            // $distresses = dbSelectAll('distress_broadcasts', "`Title` = '" . $this->email . "'");
+
+            // if (!$this->title) {
+            //     $this->errors->title = 'Your road tip requires a "Title"';
+            // }
+            // elseif ($tips) {
+            //     $this->errors->email = 'This road tip title already exists';
+            // }
+
+            // if (!$this->content) {
+            //     $this->errors->content = 'Your road tip requires the "Content"';
+            // }
+
+            if ($this->errors->isvalid()) {
+                return true;
+            }
+            else {
+                return false;
+            }
+    
+        }
+
+        function validateNewPoorRoadReport () {
+
+            $data = json_decode(file_get_contents("php://input"));
+
+            $this->location = $data->{'location'};
+            $this->damage_ratio = $data->{'damage-ratio'};
+            $this->pictures = $data->{'pictures'};
+            $this->data = $data->{'data'};
+            
+            // Validate Poor Road Data
+
+            // $distresses = dbSelectAll('distress_broadcasts', "`Title` = '" . $this->email . "'");
+
+            // if (!$this->title) {
+            //     $this->errors->title = 'Your road tip requires a "Title"';
+            // }
+            // elseif ($tips) {
+            //     $this->errors->email = 'This road tip title already exists';
+            // }
+
+            // if (!$this->content) {
+            //     $this->errors->content = 'Your road tip requires the "Content"';
+            // }
+
+            if ($this->errors->isvalid()) {
+                return true;
+            }
+            else {
+                return false;
+            }
+    
+        }
+
+        function validateNewRogueDriverReport () {
+
+            $data = json_decode(file_get_contents("php://input"));
+
+            $this->location = $data->{'location'};
+            $this->pictures = $data->{'pictures'};
+            $this->medias = $data->{'medias'};
+            $this->data = $data->{'data'};
+            
+            // Validate Distress Broadcast Data
+
+            // $distresses = dbSelectAll('distress_broadcasts', "`Title` = '" . $this->email . "'");
+
+            // if (!$this->title) {
+            //     $this->errors->title = 'Your road tip requires a "Title"';
+            // }
+            // elseif ($tips) {
+            //     $this->errors->email = 'This road tip title already exists';
+            // }
+
+            // if (!$this->content) {
+            //     $this->errors->content = 'Your road tip requires the "Content"';
+            // }
 
             if ($this->errors->isvalid()) {
                 return true;

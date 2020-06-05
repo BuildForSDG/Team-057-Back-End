@@ -10,6 +10,10 @@
 
             $this->road_tip_id = 'RST' . time() . strtoupper(uniqid());
 
+            if (!$this->illustration) {
+                $this->illustration = "";
+            }
+
             $fillables = [
                 'Road Tip ID',
                 'Title',

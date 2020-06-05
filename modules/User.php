@@ -120,7 +120,7 @@
         }
 
         public function OTPGen () {
-            return bin2hex(random_bytes(2));
+            return rand(10000,99999);
         }
 
         public function removeToken () {
@@ -313,9 +313,9 @@
         }
 
         public function verifyEmail () {
-            $token = dbSelect ('email_verifications', ['Token'], "`Email` = '" . $this->email . "' ORDER BY `Created At` DESC")[0];
+            $otp = dbSelect ('email_verifications', ['OTP'], "`Email` = '" . $this->email . "' ORDER BY `Created At` DESC")[0];
 
-            if ($this->email_verify_token === $token['Token']) {
+            if ($this->email_verify_otp === $otp['OTP']) {
 
                 $fillables = [
                     'Email Verified At'
@@ -334,7 +334,7 @@
 
             }
             else {
-                return false;
+                return 'unmatched';
             }
         }
 

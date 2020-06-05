@@ -30,3 +30,17 @@ POST	/api/road-tips/create	424	40763ms
 POST	/api/road-tips/create	424	40586ms
 POST	/api/road-tips/create	400	21785ms
 POST	/api/road-tips/create	424	40685ms
+GET	/	200	69ms
+POST	/api/road-tips/create	424	68054ms
+POST	/api/road-tips/create	424	41818ms
+POST	/api/road-tips/create	424	40855ms
+POST	/api/road-tips/create	424	40551ms
+POST	/api/road-tips/create	424	40956ms
+POST	/api/road-tips/create	201	57855ms
+POST	/api/road-tips/create	201	52913ms
+GET	/test	200	453ms
+GET	/test	200	113ms
+GET	/test	200	00ms
+GET	/test	200	00ms
+GET	/test	200	184ms
+GET	/test	200	00ms

@@ -18,8 +18,8 @@
             
             case '/api/user/profile/create' : action('api/create/profile'); break;
             case '/api/distresses/create' : action('api/create/distress'); break;
-            case '/api/reports/rouge-drivers/create' : action('api/create/report/rouge-driver'); break;
-            case '/api/reports/poor-roads/create' : action('api/create/report/rouge-driver'); break;
+            case '/api/reports/rouge-drivers/create' : action('api/create/rouge-driver'); break;
+            case '/api/reports/poor-roads/create' : action('api/create/poor-roads'); break;
             case '/api/road-tips/create' : action('api/create/road-tips'); break;
 
             case '/api/user/profile/update' : action('api/update/profile'); break;
@@ -35,6 +35,8 @@
         switch ($request) {
             case '' : _(getenv('APP_NAME')); break;
             case '/' : _(getenv('APP_NAME')); break;
+
+            case '/test' : _(rand(10000,99999)); break;
             
             case '/api/user/profile' : action('api/read/profile'); break;
             

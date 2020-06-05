@@ -68,7 +68,7 @@
         name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
     ]);
 
-    dbCreate('rouge_driver_reports', [
+    dbCreate('rogue_driver_reports', [
         name('id').intg().null(false).autoInc(),
         name('Report ID').text().null(false),
         name('Location').text(),

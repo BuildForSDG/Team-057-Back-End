@@ -43,8 +43,59 @@
         $user->state = $input->state;
         $user->city = $input->city;
         $user->address = $input->address;
+        $user->email_verify_otp = $input->activation_code;
 
-        if ($user->create()) {
+        if ($user->email_verify_otp) {
+
+            if ($user->verifyEmail() === "unmatched") {
+                $output = [
+                    "fulfillmentMessages" => [
+                        [
+                            "text" => [
+                                "text" => [
+                                    "Incorrect activation code.",
+                                    // "An email has been sent to your email address " . $user->email . ". In it contains your account activation code.",
+                                    // "What is the activation code please?"
+                                ]
+                            ]
+                        ]
+                    ]
+                ];
+            }
+            elseif ($user->verifyEmail() === true) {
+                $output = [
+                    "fulfillmentMessages" => [
+                        [
+                            "text" => [
+                                "text" => [
+                                    "Your account has successfully been activated.",
+                                    "Enjoy my sevices.",
+                                    // "An email has been sent to your email address " . $user->email . ". In it contains your account activation code.",
+                                    // "What is the activation code please?"
+                                ]
+                            ]
+                        ]
+                    ]
+                ];
+            }
+            else {
+                $output = [
+                    "fulfillmentMessages" => [
+                        [
+                            "text" => [
+                                "text" => [
+                                    "An error occurred, please try again.",
+                                    // "An email has been sent to your email address " . $user->email . ". In it contains your account activation code.",
+                                    // "What is the activation code please?"
+                                ]
+                            ]
+                        ]
+                    ]
+                ];
+            }
+
+        }
+        elseif ($user->create()) {
 
             $output = [
                 "fulfillmentMessages" => [
