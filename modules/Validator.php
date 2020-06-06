@@ -92,7 +92,7 @@
                     //     $this->errors->dob = 'Sorry, this service is available only to students from 10 years and above.';
                     // }
 
-                    $user = dbSelectAll('users', "`Email` = '" . $this->email . "'");
+                    // $user = dbSelectAll('users', "`Email` = '" . $this->email . "'");
 
                     if (!$this->email) {
                         $this->errors->email = 'Your email address?';
@@ -101,7 +101,7 @@
                         $this->errors->email = 'This email address has already been used.';
                     }
 
-                    $user = dbSelectAll('users', "`Phone` = '" . $this->phone . "'");
+                    // $user = dbSelectAll('users', "`Phone` = '" . $this->phone . "'");
 
                     if (!$this->phone) {
                         $this->errors->phone = 'Please input your phone number';
