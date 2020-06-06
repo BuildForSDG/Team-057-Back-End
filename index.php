@@ -50,7 +50,9 @@
 
             case '/api/road-tips' : action('api/read/road-tips'); break;
 
-            case '/view/users' : header("Content-type: application/json"); _(json_encode(dbSelectAll('users', 1))); break;
+            // case '/view/users' : header("Content-type: application/json"); _(json_encode(dbSelectAll('users', 1))); break;
+
+            // case '/truncate/users' 
 
             case '/setup' : require 'database/migrations/setup.php'; break;
             

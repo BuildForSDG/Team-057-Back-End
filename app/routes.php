@@ -17,6 +17,15 @@
         _((dbDropTable($db_table)) ? 'Done...' : 'Not Done...');
 
     }
+    elseif (fnmatch("/db/truncate/*", $request)) {
+        
+        $db_table = str_replace('/db/truncate/', '', $request);
+
+        header("Content-type: application/json");
+
+        _((dbTruncate($db_table)) ? 'Done...' : 'Not Done...');
+
+    }
     else {
         http_response_code(404);
         view('404');
