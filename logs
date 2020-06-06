@@ -44,3 +44,7 @@ GET	/test	200	00ms
 GET	/test	200	00ms
 GET	/test	200	184ms
 GET	/test	200	00ms
+POST	/dialogflow	200	74552ms
+POST	/dialogflow	200	42344ms
+POST	/dialogflow	200	42634ms
+POST	/dialogflow	200	41693ms

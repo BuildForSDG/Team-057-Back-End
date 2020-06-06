@@ -37,6 +37,8 @@
             case '/' : _(getenv('APP_NAME')); break;
 
             case '/test' : _(rand(10000,99999)); break;
+
+            case '/test' : _(rand(10000,99999)); break;
             
             case '/api/user/profile' : action('api/read/profile'); break;
             
@@ -48,7 +50,7 @@
 
             case '/api/road-tips' : action('api/read/road-tips'); break;
 
-            // case '/view/users' : header("Content-type: application/json"); _(json_encode(dbSelectAll('users', 1))); break;
+            case '/view/users' : header("Content-type: application/json"); _(json_encode(dbSelectAll('users', 1))); break;
 
             case '/setup' : require 'database/migrations/setup.php'; break;
             
