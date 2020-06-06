@@ -1,13 +1,13 @@
 <?php
     // Verification
 
-    // $data = json_decode(file_get_contents("php://input"));
+    $data = json_decode(file_get_contents("php://input"));
     
-    // $queries = fopen("queries", "a");
+    $queries = fopen("queries", "a");
 
-    // fwrite($queries, json_encode($data) . "\n" . "\n" . "\n" . "\n");
+    fwrite($queries, json_encode($data) . "\n" . "\n" . "\n" . "\n");
 
-    // fclose($queries);
+    fclose($queries);
 
     // $output = [
     //     "fulfillmentMessages" => [
