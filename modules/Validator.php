@@ -98,7 +98,7 @@
                         $this->errors->email = 'Your email address?';
                     }
                     elseif ($user) {
-                        $this->errors->email = 'This email address has already been used. Already have an account?';
+                        $this->errors->email = 'This email address has already been used.';
                     }
 
                     $user = dbSelectAll('users', "`Phone` = '" . $this->phone . "'");
