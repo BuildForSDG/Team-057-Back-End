@@ -107,7 +107,7 @@
                         $this->errors->phone = 'Please input your phone number';
                     }
                     elseif ($user) {
-                        $this->errors->phone = 'This phone number is linked to an account already. Already have an account?';
+                        $this->errors->phone = 'This phone number is linked to an account already.';
                     }
 
                     if (!$this->country) {
