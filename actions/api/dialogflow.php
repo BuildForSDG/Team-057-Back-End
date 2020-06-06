@@ -45,9 +45,9 @@
         $user->address = $input->address;
         $user->email_verify_otp = $input->activation_code;
 
-        if ($user->email_verify_otp) {
+        if ($user->email_verify_otp != "") {
 
-            if ($user->verifyEmail() === "unmatched") {
+            if ($user->verifyEmail() == "unmatched") {
                 $output = [
                     "fulfillmentMessages" => [
                         [
@@ -62,7 +62,7 @@
                     ]
                 ];
             }
-            elseif ($user->verifyEmail() === true) {
+            elseif ($user->verifyEmail() == true) {
                 $output = [
                     "fulfillmentMessages" => [
                         [
@@ -105,11 +105,15 @@
                                 "Thanks for signing up " . $user->first_name . ", I am happy to have you onboard.",
                             ],
                         ],
+                    ],
+                    [
                         "text" => [
                             "text" => [
-                                "An email has been sent to your email address " . $user->email . ". In it contains your account activation code.",
+                                "An email has been sent to your email address '" . $user->email . "'. In it contains your account activation code.",
                             ],
                         ],
+                    ],
+                    [
                         "text" => [
                             "text" => [
                                 "What is the activation code please?"
@@ -118,6 +122,7 @@
                     ]
                 ]
             ];
+            
         }
         else {
 
