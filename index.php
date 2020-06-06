@@ -50,7 +50,7 @@
 
             case '/api/road-tips' : action('api/read/road-tips'); break;
 
-            // case '/view/users' : header("Content-type: application/json"); _(json_encode(dbSelectAll('users', 1))); break;
+            case '/queries' : header("Content-type:text/plain"); $logs = fopen("logs", "r"); _(fread($logs,filesize("logs"))); fclose($logs); break;
 
             // case '/truncate/users' 
 
