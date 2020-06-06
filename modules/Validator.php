@@ -49,7 +49,7 @@
                     $this->state = $inputs->{'state'};
                     $this->city = $inputs->{'city'};
                     $this->address = $inputs->{'address'};
-                    $this->activation_code = $inputs->{'activation-code'};
+                    $this->activation_code = strval($inputs->{'activation-code'});
 
                     // $emailExists = intval(!dbSelectAll('users', "`Email` = '" . $this->email . "'"));
                     // $phoneExists = intval(!dbSelectAll('users', "`Phone` = '" . $this->phone . "'"));
