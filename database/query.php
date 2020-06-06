@@ -201,6 +201,8 @@
         // echo $sql . '<br><br>';
 
         $result = $conn->query($sql);
+
+        CloseCon($conn);
     
         if ($result) {
             return true;
@@ -208,8 +210,6 @@
         else {
             return false;
         }
-
-        CloseCon($conn);
     };
 
     function dbCreate($table, $values) {

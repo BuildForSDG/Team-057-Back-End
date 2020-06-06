@@ -47,7 +47,7 @@
 
         if ($user->email_verify_otp != "") {
 
-            if ($user->verifyEmail() == "unmatched") {
+            if ($user->verifyEmail() === 'unmatched') {
                 $output = [
                     "fulfillmentMessages" => [
                         [
@@ -69,11 +69,15 @@
                             "text" => [
                                 "text" => [
                                     "Your account has successfully been activated.",
-                                    "Enjoy my sevices.",
                                     // "An email has been sent to your email address " . $user->email . ". In it contains your account activation code.",
                                     // "What is the activation code please?"
                                 ]
-                            ]
+                            ],
+                            "text" => [
+                                "text" => [
+                                    "Enjoy my sevices.",
+                                ]
+                            ],
                         ]
                     ]
                 ];
