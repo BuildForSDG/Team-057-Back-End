@@ -315,7 +315,7 @@
         public function verifyEmail () {
             $otp = dbSelect ('email_verifications', ['OTP'], "`Email` = '" . $this->email . "' ORDER BY `Created At` DESC")[0];
 
-            if ($this->email_verify_otp === $otp['OTP']) {
+            if ($this->email_verify_otp == $otp['OTP']) {
 
                 $fillables = [
                     'Email Verified At'
