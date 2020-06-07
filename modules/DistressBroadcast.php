@@ -4,6 +4,7 @@
 
         public $location;
         public $data;
+        public $broadcasting;
 
         public function create () {
 
@@ -17,6 +18,7 @@
                 'Distress ID',
                 'Location',
                 'Data',
+                'Broadcasting',
             ];
 
             $insert = dbInsert ('distress_broadcasts', $fillables, [
@@ -24,13 +26,16 @@
                     $this->distress_id,
                     $this->location,
                     $this->data,
+                    true,
                 ]
             ]);
 
             if ($insert) {
+                $this->broadcasting = true;
                 return true;
             }
             else {
+                $this->broadcasting = false;
                 return false;
             }
         }

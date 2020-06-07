@@ -55,6 +55,7 @@
         name('Distress ID').text().null(false),
         name('Location').text(),
         name('Data').text(),
+        name('Broadcasting').boln().null(false),
         name('Created At').timestamp().null(false).def(['CURRENT_TIMESTAMP'])
     ]);
 

@@ -311,21 +311,6 @@
 
             $this->location = $data->{'location'};
             $this->data = $data->{'data'};
-            
-            // Validate Distress Broadcast Data
-
-            // $distresses = dbSelectAll('distress_broadcasts', "`Title` = '" . $this->email . "'");
-
-            // if (!$this->title) {
-            //     $this->errors->title = 'Your road tip requires a "Title"';
-            // }
-            // elseif ($tips) {
-            //     $this->errors->email = 'This road tip title already exists';
-            // }
-
-            // if (!$this->content) {
-            //     $this->errors->content = 'Your road tip requires the "Content"';
-            // }
 
             if ($this->errors->isvalid()) {
                 return true;
