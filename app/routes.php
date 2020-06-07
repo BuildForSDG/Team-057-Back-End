@@ -27,11 +27,8 @@
 
     }
     elseif (fnmatch("/api/DSB*/stop", $request)) {
-        
-        $distress_id = str_replace('/api/', '', $request);
-        $distress_id = str_replace('/stop', '', $distress_id);
 
-        require 'actions/api/update/stop-distress.php';
+        action('api/update/stop-distress');
 
     }
     else {

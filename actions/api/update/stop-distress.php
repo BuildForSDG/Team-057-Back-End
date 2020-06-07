@@ -1,4 +1,8 @@
 <?php
+        
+    $distress_id = str_replace('/api/', '', $request);
+    $distress_id = str_replace('/stop', '', $distress_id);
+
     $output = [];
 
     $distress = new DistressBroadcast();
