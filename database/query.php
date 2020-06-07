@@ -55,15 +55,21 @@
 
         $result = $conn->query($sql);
 
-        $i = 0;
+        if ($result) {
 
-        while ($row = $result->fetch_assoc()) {
-            $data[$i] = $row;
+            $i = 0;
 
-            $i++;
-        }
+            while ($row = $result->fetch_assoc()) {
+                $data[$i] = $row;
+    
+                $i++;
+            }
         
-        return $data;
+            return $data;
+        }
+        else {
+            return false;
+        }
 
         CloseCon($conn);
     };
@@ -195,6 +201,8 @@
         // echo $sql . '<br><br>';
 
         $result = $conn->query($sql);
+
+        CloseCon($conn);
     
         if ($result) {
             return true;
@@ -202,8 +210,6 @@
         else {
             return false;
         }
-
-        CloseCon($conn);
     };
 
     function dbCreate($table, $values) {
@@ -268,6 +274,30 @@
         CloseCon($conn);
     }
 
+    function dbDropTable($table) {
+
+        $conn = OpenCon();
+
+        $sql = "DROP TABLE `$table`";
+
+        echo $sql . '<br><br>';
+
+        $result = $conn->query($sql);
+    
+        if ($result) {
+            echo 'Table "' . $table . '" dropped successfully.';
+            echo '<br>';
+            return true;
+        }
+        else {
+            echo 'Error dropping "' . $table . '". ERROR_MESSAGE:' . $conn -> error;
+            echo '<br>';
+            return false;
+        }
+
+        CloseCon($conn);
+    }
+
     function name ($name) {
         return "`$name`";
     }
@@ -280,6 +310,10 @@
         return " TEXT";
     }
 
+    function json () {
+        return " JSON";
+    }
+
     function boln () {
         return " BOOLEAN";
     }
@@ -289,7 +323,15 @@
     }
 
     function varchar ($limit) {
-        return " VARCHAR($limit)";
+        if (gettype($limit) == 'string') {
+            return " VARCHAR('$limit')";
+        }
+        elseif (gettype($limit) == 'array') {
+            return " VARCHAR(" . $limit[0] . ")";
+        }
+        else {
+            return " VARCHAR($limit)";
+        }
     }
 
     function timestamp () {
@@ -310,6 +352,14 @@
     }
 
     function def ($val) {
-        return " DEFAULT $val";
+        if (gettype($val) == 'string') {
+            return " DEFAULT '$val'";
+        }
+        elseif (gettype($val) == 'array') {
+            return " DEFAULT " . $val[0];
+        }
+        else {
+            return " DEFAULT $val";
+        }
     }
 ?>
