@@ -24,18 +24,16 @@
             $insert = dbInsert ('distress_broadcasts', $fillables, [
                 [
                     $this->distress_id,
-                    $this->location,
-                    $this->data,
+                    json_encode($this->location),
+                    json_encode($this->data),
                     true,
                 ]
             ]);
 
             if ($insert) {
-                $this->broadcasting = true;
                 return true;
             }
             else {
-                $this->broadcasting = false;
                 return false;
             }
         }

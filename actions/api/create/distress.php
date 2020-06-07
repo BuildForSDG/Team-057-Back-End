@@ -11,7 +11,6 @@
 
         $distress->location = $input->location;
         $distress->data = $input->data;
-        $distress->broadcasting = $input->broadcasting;
 
         if ($distress->create()) {
 
@@ -25,7 +24,7 @@
                     "Distress ID" => $distress->distress_id,
                     "Location" => $distress->location,
                     "Data" => $distress->data,
-                    "Broadcasting" => $distress->broadcasting,
+                    "Broadcasting" => true
                 ],
             ];
         }
@@ -40,7 +39,7 @@
                 "data" => [
                     "Location" => $distress->location,
                     "Data" => $distress->data,
-                    "Broadcasting" => $distress->broadcasting,
+                    "Broadcasting" => false
                 ],
             ];
         }
