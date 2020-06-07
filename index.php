@@ -13,8 +13,21 @@
     
     if ($method === 'POST') {
         switch ($request) {
-            // case '/api/v1/on-covid-19' : action('api/estimate-json'); break;
+            case '/dialogflow' : action('api/dialogflow'); break;
+            case '/queries' : action('api/queries'); break;
             
+            case '/api/user/profile/create' : action('api/create/profile'); break;
+            case '/api/distresses/create' : action('api/create/distress'); break;
+            case '/api/reports/rouge-drivers/create' : action('api/create/rouge-driver'); break;
+            case '/api/reports/poor-roads/create' : action('api/create/poor-roads'); break;
+            case '/api/road-tips/create' : action('api/create/road-tips'); break;
+
+            case '/api/user/profile/update' : action('api/update/profile'); break;
+            case '/api/distresses/update' : action('api/update/distress'); break;
+            case '/api/reports/rouge-drivers/update' : action('api/update/report/rouge-driver'); break;
+            case '/api/reports/poor-roads/update' : action('api/update/report/rouge-driver'); break;
+            case '/api/road-tips/update' : action('api/update/road-tips'); break;
+
             default: require 'app/routes.php'; break;
         }
     }
@@ -23,8 +36,25 @@
             case '' : _(getenv('APP_NAME')); break;
             case '/' : _(getenv('APP_NAME')); break;
 
-            case '/api/v1/on-covid-19/logs' : $logs->view(); break;
-            case '/api/v1/on-covid-19/logs/clear' : $logs->clear(); break;
+            case '/test' : _(rand(10000,99999)); break;
+
+            case '/test' : _(rand(10000,99999)); break;
+            
+            case '/api/user/profile' : action('api/read/profile'); break;
+            
+            case '/api/distresses' : action('api/read/distress'); break;
+            
+            case '/api/reports/rouge-drivers' : action('api/read/report/rouge-driver'); break;
+            
+            case '/api/reports/poor-roads' : action('api/read/report/rouge-driver'); break;
+
+            case '/api/road-tips' : action('api/read/road-tips'); break;
+
+            case '/queries' : header("Content-type:text/plain"); $logs = fopen("logs", "r"); _(fread($logs,filesize("logs"))); fclose($logs); break;
+
+            // case '/truncate/users' 
+
+            case '/setup' : require 'database/migrations/setup.php'; break;
             
             default: require 'app/routes.php'; break;
         }

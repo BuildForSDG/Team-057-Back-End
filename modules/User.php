@@ -48,11 +48,14 @@
                 'User ID',
                 'First Name',
                 'Last Name',
-                'Email',
-                'Username',
-                'Phone',
+                'Gender',
                 'Date of Birth',
-                'Password'
+                'Email',
+                'Phone',
+                'Country',
+                'State',
+                'City',
+                'Home Address'
             ];
 
             $insertuser = dbInsert ('users', $fillables, [
@@ -60,11 +63,14 @@
                     $this->user_id,
                     $this->first_name,
                     $this->last_name,
-                    $this->email,
-                    $this->username,
-                    $this->phone,
+                    $this->gender,
                     $this->dob,
-                    $this->hash($this->password)
+                    $this->email,
+                    $this->phone,
+                    $this->country,
+                    $this->state,
+                    $this->city,
+                    $this->address,
                 ]
             ]);
 
@@ -111,6 +117,10 @@
 
         public function tokenGen () {
             return bin2hex(random_bytes(16));
+        }
+
+        public function OTPGen () {
+            return rand(10000,99999);
         }
 
         public function removeToken () {
@@ -241,17 +251,17 @@
 
         public function initEmailVerification () {
             
-            $this->email_verify_token = $this->tokenGen();
+            $this->email_verify_otp = $this->OTPGen();
 
             $fillables = [
                 'Email',
-                'Token'
+                'OTP'
             ];
 
             $insert = dbInsert ('email_verifications', $fillables, [
                 [
                     $this->email,
-                    $this->email_verify_token
+                    $this->email_verify_otp
                 ]
             ]);
 
@@ -270,11 +280,11 @@
 
             $name = $this->first_name . ' ' . $this->last_name;
 
-            $vemail->title = "Welcome to Royal Learn";
-            $vemail->message = "<h1>Confirm your email</h1><br><p>Click <a href=\"https://" . $_SERVER['SERVER_NAME'] . "/verify-email?email=" . $this->email . "&token=" . $this->email_verify_token . "\">here</a> to confirm your email address.</p>";
+            $vemail->title = "Road Assistant App";
+            $vemail->message = "<h1>Verify your email</h1><br><p>Your OTP Code is " . $this->email_verify_otp . ".</p>";
             $vemail->sender = [
                 "Email" => 'no-reply@royallearn.xyz',
-                "Name" => 'Royal Learn'
+                "Name" => 'Road Assistant App'
             ];
             $vemail->recievers = [
                 [
@@ -303,9 +313,9 @@
         }
 
         public function verifyEmail () {
-            $token = dbSelect ('email_verifications', ['Token'], "`Email` = '" . $this->email . "' ORDER BY `Created At` DESC")[0];
+            $otp = dbSelect ('email_verifications', ['OTP'], "`Email` = '" . $this->email . "' ORDER BY `Created At` DESC")[0];
 
-            if ($this->email_verify_token === $token['Token']) {
+            if ($this->email_verify_otp == $otp['OTP']) {
 
                 $fillables = [
                     'Email Verified At'
@@ -324,7 +334,7 @@
 
             }
             else {
-                return false;
+                return 'unmatched';
             }
         }
 
