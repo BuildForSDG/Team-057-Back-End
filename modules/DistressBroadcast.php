@@ -38,6 +38,20 @@
             }
         }
 
+        public function stop ($id) {
+
+            $this->distress_id = $id;
+
+            $update = dbUpdate ('distress_broadcasts', ['Broadcasting'], [0], "`Distress ID` = '" . $this->distress_id . "'");
+
+            if ($update) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
         public function getTips () {
             return dbSelectAll('distress_broadcasts', 1);
         }
